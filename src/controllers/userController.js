@@ -1,4 +1,4 @@
-const Usuario = require('../models/User'); 
+const Usuario = require('../models/User');
 const bcrypt = require('bcrypt');
 
 const usuarioController = {
@@ -25,29 +25,33 @@ const usuarioController = {
     create: async (req, res) => {
         const { rut, contrasena } = req.body;
 
-        // Validación básica
         if (!rut || !contrasena) {
             return res.status(400).json({ message: 'RUT y contraseña son requeridos' });
         }
 
         try {
-            // Encriptar la contraseña
             const hashedPassword = await bcrypt.hash(contrasena, 10);
             const newUsuario = await Usuario.create({ ...req.body, contrasena: hashedPassword });
-            res.status(201).json(newUsuario);
+            res.status(201).json({ message: 'Usuario creado con éxito', usuario: newUsuario });
         } catch (error) {
             res.status(500).json({ message: 'Error al crear el usuario', error: error.message });
         }
     },
     update: async (req, res) => {
         const { rut } = req.params;
+        const { contrasena, ...data } = req.body;
+
         try {
-            const [updated] = await Usuario.update(req.body, { where: { rut } });
+            if (contrasena) {
+                data.contrasena = await bcrypt.hash(contrasena, 10);
+            }
+
+            const [updated] = await Usuario.update(data, { where: { rut } });
             if (!updated) {
                 return res.status(404).json({ message: 'Usuario no encontrado' });
             }
-            const updatedUsuario = await Usuario.findByPk(rut);
-            res.json(updatedUsuario);
+
+            res.json({ message: 'Usuario actualizado con éxito' });
         } catch (error) {
             res.status(500).json({ message: 'Error al actualizar el usuario', error: error.message });
         }
@@ -63,7 +67,7 @@ const usuarioController = {
         } catch (error) {
             res.status(500).json({ message: 'Error al eliminar el usuario', error: error.message });
         }
-    },
+    }
 };
 
 module.exports = usuarioController;

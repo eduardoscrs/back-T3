@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const pool = require('./config/db'); 
 const usuarioRoutes = require('./routes/userRoute');
+const citaRoutes = require('./routes/citaRoute');
 
 // Configura dotenv para manejar variables de entorno
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/citas', citaRoutes);
 
 // Exporta la aplicación en lugar de iniciar el servidor aquí
 module.exports = app;

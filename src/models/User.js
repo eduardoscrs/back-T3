@@ -17,7 +17,7 @@ const Usuario = sequelize.define('Usuario', {
   rut: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // Asegúrate de que el RUT sea único
+    unique: true, // Verifica que no exista otro usuario con el mismo RUT
   },
   nombre: {
     type: DataTypes.STRING,
