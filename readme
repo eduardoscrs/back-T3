@@ -2,23 +2,23 @@ project/
 ├── config/
 │   └── db.js           // Configuración de conexión a la base de datos
 ├── controllers/
-│   ├── usuarioController.js
+│   ├── usuarioController.js++
 │   ├── rolController.js
-│   ├── citaController.js
+│   ├── citaController.js++
 │   ├── prestadorServicioController.js
 │   ├── personaMayorController.js
-│   ├── horarioController.js
+│   ├── horarioController.js++
 │   ├── notificacionController.js
 │   └── servicioController.js
 ├── models/
 │   ├── User.js ++
-│   ├── Rol.js
+│   ├── Rol.js++
 │   ├── Cita.js ++
-│   ├── PrestadorServicio.js
-│   ├── PersonaMayor.js
-│   ├── Horario.js
+│   ├── PrestadorServicio.js **
+│   ├── PersonaMayor.js++
+│   ├── Horario.js++
 │   ├── Notificacion.js
-│   └── Servicio.js
+│   └── Servicio.js**
 ├── routes/
 │   ├── usuarioRoutes.js
 │   ├── rolRoutes.js
